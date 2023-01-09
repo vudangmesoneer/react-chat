@@ -10,29 +10,3 @@
 
   overflow: hidden;
 }
-
-.title {
-  margin: 0;
-  padding: 0;
-  font-size: 24px;
-  font-weight: bold;
-  height: 30px;
-  width: 100%;
-  position: relative;
-  display: block;
-  text-align: center;
-}
-
-.message-container {
-  margin: 0;
-  padding: 0;
-
-  position: relative;
-  display: flex;
-
-  height: calc(100% - 30px - 110px);
-  width: 100%;
-
-  overflow-x: hidden;
-  overflow-y: auto;
-}

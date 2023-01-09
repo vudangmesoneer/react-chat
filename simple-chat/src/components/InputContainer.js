@@ -8,7 +8,7 @@ import './InputContainer.css';
 
 import { addMessage } from '../reducers/messageReducer';
 
-function App() {
+function InputContainer() {
   const [message, setMessage] = useState('');
   const dispatch = useDispatch();
 
@@ -48,4 +48,4 @@ function App() {
   );
 }
 
-export default App;
+export default InputContainer;
