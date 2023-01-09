@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
@@ -7,9 +7,11 @@ import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import './InputContainer.css';
 
 import { addMessage } from '../reducers/messageReducer';
+import { selectUserName } from '../reducers/userReducer';
 
 function InputContainer() {
   const [message, setMessage] = useState('');
+  const userName = useSelector(selectUserName);
   const dispatch = useDispatch();
 
   const handleChange = (event) => {
@@ -18,7 +20,7 @@ function InputContainer() {
 
   const handleClick = () => {
     if (message) {
-      dispatch(addMessage(message));
+      dispatch(addMessage({ message, userName }));
       setMessage('');
     }
   };
