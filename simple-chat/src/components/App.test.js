@@ -1,8 +1,15 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { store } from '../reducers/store';
 import App from './App';
 
 test('renders learn react link', () => {
-  render(<App />);
-  const textElement = screen.getByText(/Simple Web Chat/i);
-  expect(textElement).toBeInTheDocument();
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+
+  expect(screen.getByText(/Simple Web Chat/i)).toBeInTheDocument();
 });
