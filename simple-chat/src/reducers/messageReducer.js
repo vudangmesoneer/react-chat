@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { getMessagesFromLocalStorage } from '../helpers/getMessagesFromLocalStorage';
+import { LOCAL_STORAGE_KEY, PAGE_SIZE } from '../helpers/constants';
+
 const initialState = {
-  messages: [],
+  messages: getMessagesFromLocalStorage([], LOCAL_STORAGE_KEY, PAGE_SIZE),
 };
 
 export const messageSlice = createSlice({
@@ -11,14 +14,15 @@ export const messageSlice = createSlice({
   reducers: {
     addMessage: (state, action) => {
       state.messages.push(action.payload);
+      
     },
-    addMessagesToHead: (state, action) => {
-      state.messages = action.payload.concat(state.messages);
+    reloadMessages: (state, action) => {
+      state.messages = action.payload;
     },
   },
 });
 
-export const { addMessage, addMessagesToHead } = messageSlice.actions;
+export const { addMessage, reloadMessages } = messageSlice.actions;
 
 export const selectMessages = (state) => state.message.messages;
 

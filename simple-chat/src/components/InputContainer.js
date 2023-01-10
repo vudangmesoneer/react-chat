@@ -3,11 +3,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
+import { v4 as uuidv4 } from 'uuid';
 
 import './InputContainer.css';
 
+import { addMessagesToLocalStorage } from '../helpers/addMessagesToLocalStorage';
 import { addMessage } from '../reducers/messageReducer';
 import { selectUserName } from '../reducers/userReducer';
+import { LOCAL_STORAGE_KEY } from '../helpers/constants';
 
 function InputContainer() {
   const [message, setMessage] = useState('');
@@ -20,7 +23,9 @@ function InputContainer() {
 
   const handleClick = () => {
     if (message) {
-      dispatch(addMessage({ message, userName }));
+      const newMessage = { _id: uuidv4(), message, userName, date: (new Date()).toISOString() };
+      dispatch(addMessage(newMessage));
+      addMessagesToLocalStorage([newMessage], LOCAL_STORAGE_KEY);
       setMessage('');
     }
   };
