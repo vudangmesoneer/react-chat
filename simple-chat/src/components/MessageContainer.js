@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Tooltip from '@mui/material/Tooltip';
@@ -10,9 +11,27 @@ import { selectUserName } from '../reducers/userReducer';
 function MessageContainer() {
   const messages = useSelector(selectMessages);
   const userName = useSelector(selectUserName);
+  const [isAtBottom, setIsAtBottom] = useState(true);
+  const messageContainer = useRef(null);
+
+  useEffect(() => {
+    if (isAtBottom) {
+      messageContainer.current.scrollTo(0, messageContainer.current.scrollHeight);
+    }
+  }, [messages, isAtBottom]);
+
+  const handleMessageContainerScroll = (event) => {
+    const scrollThreshold = 100;
+
+    if (event.target.scrollTop + scrollThreshold >= event.target.scrollHeight - event.target.clientHeight) {
+      setIsAtBottom(true);
+    } else {
+      setIsAtBottom(false);
+    }
+  };
 
   return (
-    <main className='message-container'>
+    <main className='message-container' ref={messageContainer} onScroll={handleMessageContainerScroll}>
       {
         messages.map((msg) => {
           if (msg.userName === userName) {

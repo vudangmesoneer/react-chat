@@ -29,8 +29,6 @@ function App() {
 
   // eslint-disable-next-line no-restricted-globals
   addEventListener('focus', () => {
-    console.log('user focus');
-    
     callback(messages, LOCAL_STORAGE_KEY, PAGE_SIZE, dispatch);
   });
 
