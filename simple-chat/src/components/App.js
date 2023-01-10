@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
 import { useSelector, useDispatch } from 'react-redux';
-import _ from 'underscore';
 
 import './App.css';
 
@@ -9,18 +8,9 @@ import InputContainer from './InputContainer';
 import MessageContainer from './MessageContainer';
 import HeaderContainer from './HeaderContainer';
 import RegisterContainer from './RegisterContainer';
-import { selectMessages, reloadMessages } from '../reducers/messageReducer';
+import { selectMessages } from '../reducers/messageReducer';
 import { selectUserName } from '../reducers/userReducer';
-import { getMessagesFromLocalStorage } from '../helpers/getMessagesFromLocalStorage';
-import { LOCAL_STORAGE_KEY, PAGE_SIZE } from '../helpers/constants';
-
-const callback = _.throttle((currentMessages, key, pageSize, dispatchFunc) => {
-  const messages = getMessagesFromLocalStorage(currentMessages, key, pageSize);
-
-  if (Array.isArray(messages)) {
-    dispatchFunc(reloadMessages(messages));
-  }
-}, 200, { trailing: false });
+import { loadMoreMessages } from '../functions/loadMoreMessages';
 
 function App() {
   const userName = useSelector(selectUserName);
@@ -29,7 +19,7 @@ function App() {
 
   // eslint-disable-next-line no-restricted-globals
   addEventListener('focus', () => {
-    callback(messages, LOCAL_STORAGE_KEY, PAGE_SIZE, dispatch);
+    loadMoreMessages(messages, dispatch);
   });
 
   return (

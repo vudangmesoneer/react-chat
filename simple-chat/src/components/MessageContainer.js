@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Tooltip from '@mui/material/Tooltip';
 
@@ -7,12 +7,14 @@ import './MessageContainer.css';
 
 import { selectMessages } from '../reducers/messageReducer';
 import { selectUserName } from '../reducers/userReducer';
+import { loadMoreHistoryMessages } from '../functions/loadMoreHistoryMessages';
 
 function MessageContainer() {
   const messages = useSelector(selectMessages);
   const userName = useSelector(selectUserName);
   const [isAtBottom, setIsAtBottom] = useState(true);
   const messageContainer = useRef(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (isAtBottom) {
@@ -21,12 +23,19 @@ function MessageContainer() {
   }, [messages, isAtBottom]);
 
   const handleMessageContainerScroll = (event) => {
-    const scrollThreshold = 100;
+    const scrollThreshold = 50;
 
+    // check if scroll is at the bottom
     if (event.target.scrollTop + scrollThreshold >= event.target.scrollHeight - event.target.clientHeight) {
       setIsAtBottom(true);
     } else {
       setIsAtBottom(false);
+    }
+
+    // check if scroll is on the top
+    if (event.target.scrollTop < scrollThreshold) {
+      // try to load more messages
+      loadMoreHistoryMessages(messages, dispatch);
     }
   };
 

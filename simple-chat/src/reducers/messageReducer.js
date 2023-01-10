@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { getMessagesFromLocalStorage } from '../helpers/getMessagesFromLocalStorage';
+import { getHistoryMessagesFromLocalStorage } from '../helpers/getHistoryMessagesFromLocalStorage';
 import { LOCAL_STORAGE_KEY, PAGE_SIZE } from '../helpers/constants';
 
 const initialState = {
-  messages: getMessagesFromLocalStorage([], LOCAL_STORAGE_KEY, PAGE_SIZE),
+  messages: getHistoryMessagesFromLocalStorage([], LOCAL_STORAGE_KEY, PAGE_SIZE),
 };
 
 export const messageSlice = createSlice({

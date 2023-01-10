@@ -1,4 +1,4 @@
-export const getMessagesFromLocalStorage = (currentMessages, key, pageSize) => {
+export const getHistoryMessagesFromLocalStorage = (currentMessages, key, pageSize) => {
   if (Array.isArray(currentMessages) === false) {
     return;
   }
