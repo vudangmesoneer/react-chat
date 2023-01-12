@@ -1,0 +1,39 @@
+.message-container {
+  margin: 0;
+  padding: 0;
+
+  position: relative;
+  display: block;
+
+  height: calc(100% - 60px - 110px);
+  width: 100%;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.message {
+  margin: 0;
+  padding: 10px;
+
+  position: relative;
+  display: flex;
+
+  width: calc(100% - 20px);
+  min-height: 40px;
+}
+
+.message--right {
+  flex-direction: row-reverse;
+}
+
+.message--left {
+  flex-direction: row;
+}
+
+.message-content {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}

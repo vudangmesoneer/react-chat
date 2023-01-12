@@ -1,0 +1,45 @@
+.register-form {
+  margin: 0;
+  padding: 24px;
+
+  position: relative;
+  display: block;
+}
+
+.register-form__header {
+  text-align: center;
+  font-size: 24px;
+
+  margin-bottom: 24px;
+}
+
+.register-form__input {
+  width: 100%;
+}
+
+.register-form__separated {
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  height: 1px;
+  width: 100%;
+
+  background-color: lightgray;
+}
+
+.register-form__button {
+  margin: 0;
+  padding: 0;
+
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-form__button button {
+  width: 200px;
+}
